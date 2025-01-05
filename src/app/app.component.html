@@ -1,0 +1,71 @@
+<ion-app>
+  <ion-router-outlet></ion-router-outlet>
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>Dokument-Scanner</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content>
+    <form [formGroup]="scannerForm" (ngSubmit)="onStartScan()">
+      <ion-list>
+        <!-- pageLimit -->
+        <ion-item>
+          <ion-label position="floating"
+            >Seitenlimit (0 = kein Limit)</ion-label
+          >
+          <ion-input
+            type="number"
+            formControlName="pageLimit"
+            placeholder="z.B. 3"
+          ></ion-input>
+        </ion-item>
+
+        <!-- galleryImportAllowed -->
+        <ion-item>
+          <ion-label>Import aus Galerie erlauben</ion-label>
+          <ion-toggle formControlName="galleryImportAllowed"></ion-toggle>
+        </ion-item>
+
+        <!-- scannerMode -->
+        <ion-item>
+          <ion-label position="stacked">Scanner-Modus</ion-label>
+          <ion-select formControlName="scannerMode">
+            <ion-select-option value="SCANNER_MODE_BASE"
+              >SCANNER_MODE_BASE</ion-select-option
+            >
+            <ion-select-option value="SCANNER_MODE_BASE_WITH_FILTER"
+              >SCANNER_MODE_BASE_WITH_FILTER</ion-select-option
+            >
+            <ion-select-option value="SCANNER_MODE_FULL"
+              >SCANNER_MODE_FULL</ion-select-option
+            >
+          </ion-select>
+        </ion-item>
+
+        <!-- resultFormat -->
+        <ion-item>
+          <ion-label position="stacked">Ergebnisformat</ion-label>
+          <ion-select formControlName="resultFormat">
+            <ion-select-option value="PDF">PDF</ion-select-option>
+            <ion-select-option value="JPEG">JPEG</ion-select-option>
+          </ion-select>
+        </ion-item>
+
+        <!-- lowerQuality -->
+        <ion-item>
+          <ion-label position="floating">Bild-/PDF-Qualität (1-100)</ion-label>
+          <ion-input
+            type="number"
+            formControlName="lowerQuality"
+            placeholder="z.B. 50"
+          ></ion-input>
+        </ion-item>
+      </ion-list>
+
+      <ion-button type="submit" expand="block" [disabled]="scannerForm.invalid">
+        Scan starten
+      </ion-button>
+    </form>
+  </ion-content>
+</ion-app>
